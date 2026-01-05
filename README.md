@@ -1,16 +1,53 @@
-# flutter_ecommerce
+# 🚀 Tech Stack
 
-A new Flutter project.
+- `State management`: flutter_riverpod
 
-## Getting Started
+- `Routing`: go_router
 
-This project is a starting point for a Flutter application.
+- `HTTP`: dio
 
-A few resources to get you started if this is your first Flutter project:
+- `JSON`: json_serializable
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `Env`: flutter_dotenv
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- `Logger`: logger
+
+- `Secure storage`: flutter_secure_storage
+
+- `Connectivity`: connectivity_plus
+
+# 🎨 UI & UX
+
+- `Fonts`: google_fonts
+
+- `Icons`: flutter_svg
+
+- `Animation`: flutter_animate
+
+- `Shimmer`: shimmer
+
+- `Responsive`: flutter_screenutil
+
+# Kiến trúc sử dụng: **Feature-first**
+
+- Mỗi một module = 1 feature
+
+## Clean Architecture bên trong mỗi feature
+
+```dart
+
+presentation → domain → data
+
+```
+
+## presentation
+
+==> Vai trò: UI + Riverpod
+
+## domain
+
+==> Vai trò: Business logic, usecase
+
+## data
+
+==> Vai trò: API, cache, Firebase
