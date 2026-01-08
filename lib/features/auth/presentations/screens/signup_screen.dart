@@ -63,7 +63,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   obscureText: _obscurePassword,
                   controller: passwordController,
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'Mật khẩu',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -85,7 +85,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: confirmPasswordController,
                   maxLength: 100,
                   decoration: InputDecoration(
-                    labelText: 'Confirm Password',
+                    labelText: 'Xác nhận mật khẩu',
                     counterText: '',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -115,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     // Xử lý khi chọn vai trò
                   },
                   decoration: InputDecoration(
-                    labelText: 'Select Role',
+                    labelText: 'Chọn vai trò',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -139,7 +139,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text("Already have an account?"),
+                    const Text("Bạn đã có tài khoản?"),
                     const SizedBox(width: 8),
                     InkWell(
                       onTap: () {
@@ -153,7 +153,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           vertical: 1,
                         ),
                         child: const Text(
-                          'Log In Now',
+                          'Đăng nhập ngay',
                           style: TextStyle(
                             color: Colors.blue,
                             fontSize: 14,

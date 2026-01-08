@@ -44,9 +44,9 @@ class LoginScreen extends ConsumerWidget {
                 onChanged: notifier.onEmailChanged,
                 decoration: InputDecoration(
                   errorText: form.email.error == EmailValidationError.empty
-                      ? 'Email is required'
+                      ? 'Vui lòng nhập email'
                       : form.email.error == EmailValidationError.invalid
-                      ? 'Invalid email'
+                      ? 'Email không đúng định dạng!'
                       : null,
                   errorStyle: TextStyle(color: Colors.redAccent),
                   errorBorder: OutlineInputBorder(
@@ -76,20 +76,20 @@ class LoginScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'Enter your password',
+                'Nhập mật khẩu',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.start,
               ),
               const SizedBox(height: 4),
               TextFormField(
-                obscureText: true,
+                obscureText: !form.isShowPassword,
                 onChanged: notifier.onPasswordChanged,
                 decoration: InputDecoration(
                   errorText:
                       form.password.error == PasswordValidationError.empty
-                      ? 'Password is required'
+                      ? 'Vui lòng nhập mật khẩu'
                       : form.password.error == PasswordValidationError.tooShort
-                      ? 'Min 6 characters'
+                      ? 'Tối thiểu 6 ký tự'
                       : null,
                   border: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -100,9 +100,14 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  suffixIcon: Icon(
-                    Icons.remove_red_eye_rounded,
-                    color: Colors.grey,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      form.isShowPassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: notifier.togglePasswordVisibility,
                   ),
                 ),
               ),
@@ -137,7 +142,7 @@ class LoginScreen extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  const Text("Don't have an account?"),
+                  const Text("Bạn chưa có tài khoản?"),
                   const SizedBox(width: 8),
                   InkWell(
                     onTap: () {
@@ -149,7 +154,7 @@ class LoginScreen extends ConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 1),
                       child: const Text(
-                        'Sign Up Now',
+                        'Đăng ký ngay',
                         style: TextStyle(
                           color: Colors.orange,
                           fontSize: 14,

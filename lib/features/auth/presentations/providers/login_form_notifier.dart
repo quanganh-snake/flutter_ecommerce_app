@@ -17,6 +17,10 @@ class LoginFormNotifier extends Notifier<LoginFormState> {
     state = state.copyWith(password: PasswordInput.dirty(value));
   }
 
+  void togglePasswordVisibility() {
+    state = state.togglePasswordVisibility();
+  }
+
   Future<void> submit() async {
     final markedState = state.markAllDirty(state);
     state = markedState;

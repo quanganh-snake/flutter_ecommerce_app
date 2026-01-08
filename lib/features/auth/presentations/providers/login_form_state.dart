@@ -5,11 +5,13 @@ class LoginFormState {
   final EmailInput email;
   final PasswordInput password;
   final bool isSubmitting;
+  final bool isShowPassword;
 
   const LoginFormState({
     this.email = const EmailInput.pure(),
     this.password = const PasswordInput.pure(),
     this.isSubmitting = false,
+    this.isShowPassword = false,
   });
 
   bool get isValid => email.isValid && password.isValid;
@@ -30,6 +32,15 @@ class LoginFormState {
     return state.copyWith(
       email: EmailInput.dirty(state.email.value),
       password: PasswordInput.dirty(state.password.value),
+    );
+  }
+
+  LoginFormState togglePasswordVisibility() {
+    return LoginFormState(
+      email: email,
+      password: password,
+      isSubmitting: isSubmitting,
+      isShowPassword: !isShowPassword,
     );
   }
 }
