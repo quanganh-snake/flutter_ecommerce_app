@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "48650323494",
+    "firebase_url": "https://flutter-learn-554bd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "flutter-learn-554bd",
+    "storage_bucket": "flutter-learn-554bd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48650323494:android:91788e0e286af3c701c8e7",
+        "android_client_info": {
+          "package_name": "com.example.flutter_ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48650323494-3poq9h0bk8c7pavn4bnil1i13ba0k60g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmlydIFgdTKgTtW5BzIbQBcfG-JxpysKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48650323494-3poq9h0bk8c7pavn4bnil1i13ba0k60g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

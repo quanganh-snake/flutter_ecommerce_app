@@ -27,8 +27,15 @@ class AuthService {
       });
 
       return null; // Trả về null nếu đăng ký thành công
-    } catch (e) {
-      return e.toString();
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'email-already-in-use':
+          return 'Email đã được sử dụng';
+        case 'weak-password':
+          return 'Mật khẩu quá yếu';
+        default:
+          return 'Đăng ký thất bại';
+      }
     }
   }
 
