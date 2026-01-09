@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
 import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
 import 'package:flutter_ecommerce/features/auth/presentations/providers/login_form_provider.dart';
+import 'package:flutter_ecommerce/features/auth/presentations/providers/login_form_state.dart';
 import 'package:flutter_ecommerce/features/auth/presentations/screens/signup_screen.dart';
+import 'package:flutter_ecommerce/features/admin/dashboard/presentations/screens/dashboard_screen.dart';
+import 'package:flutter_ecommerce/features/user/home/presentations/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -12,6 +15,57 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final form = ref.watch(loginFormProvider);
     final notifier = ref.read(loginFormProvider.notifier);
+
+    ref.listen<LoginFormState>(loginFormProvider, (previous, next) {
+      final role = next.role;
+      if (previous?.isSubmitting == true && !next.isSubmitting) {
+        if (next.errorMessage != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(next.errorMessage!),
+              backgroundColor: Colors.red,
+            ),
+          );
+        } else {
+          if (role == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Tài khoản chưa được kích hoạt! Vui lòng kiểm tra email.',
+                ),
+                backgroundColor: Colors.red,
+              ),
+            );
+            return;
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                role == 'user'
+                    ? 'Bạn đã đăng nhập với email người dùng ${next.email.value} thành công!'
+                    : role == 'admin'
+                    ? 'Bạn đã đăng nhập với email quản trị viên ${next.email.value} thành công!'
+                    : 'Đăng nhập thành công!',
+              ),
+              backgroundColor: Colors.green,
+            ),
+          );
+          if (role == 'admin') {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const DashboardScreen()),
+            );
+          } else if (role == 'user') {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          } else {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          }
+        }
+      }
+    });
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 253, 249),
@@ -35,7 +89,7 @@ class LoginScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Enter your email',
+                'Email',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.start,
               ),
@@ -71,12 +125,21 @@ class LoginScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   focusColor: Colors.orange,
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 1,
+                      style: BorderStyle.solid,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
                 cursorColor: Colors.orange,
               ),
               const SizedBox(height: 16),
               Text(
-                'Nhập mật khẩu',
+                'Mật khẩu',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.start,
               ),
@@ -95,6 +158,25 @@ class LoginScreen extends ConsumerWidget {
                     borderSide: BorderSide(
                       color: Colors.grey,
                       width: 2,
+                      style: BorderStyle.solid,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.orange,
+                      width: 1,
+                      style: BorderStyle.solid,
+                      strokeAlign: BorderSide.strokeAlignCenter,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  focusColor: Colors.orange,
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 1,
                       style: BorderStyle.solid,
                       strokeAlign: BorderSide.strokeAlignCenter,
                     ),
@@ -127,7 +209,30 @@ class LoginScreen extends ConsumerWidget {
                     backgroundColor: Colors.orange,
                   ),
                   child: form.isSubmitting
-                      ? const CircularProgressIndicator()
+                      ? const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 20.0,
+                              width: 20.0,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 1.5,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 16),
+                            Text(
+                              'Đang đăng nhập...',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ],
+                        )
                       : const Text(
                           'Login',
                           style: TextStyle(

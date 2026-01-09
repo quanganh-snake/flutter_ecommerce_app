@@ -41,10 +41,8 @@ class AuthService {
 
   /// Funtion: Đăng nhập người dùng với email và mật khẩu
   Future<String?> login({
-    required String fullName,
     required String email,
     required String password,
-    required String role,
   }) async {
     try {
       UserCredential userCredential = await _firebaseAuth
@@ -56,9 +54,13 @@ class AuthService {
           .doc(userCredential.user!.uid)
           .get();
 
-      return userDoc['role']; // Trả về null nếu đăng ký thành công
+      return userDoc['role'];
     } catch (e) {
       return e.toString();
     }
+  }
+
+  void signOut() {
+    _firebaseAuth.signOut();
   }
 }

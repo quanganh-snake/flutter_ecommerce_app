@@ -1,3 +1,7 @@
+import 'package:flutter_ecommerce/features/auth/domain/validators/fullname.dart';
+import 'package:flutter_ecommerce/features/auth/domain/validators/role.dart';
+import 'package:flutter_ecommerce/features/auth/presentations/providers/auth_service_provider.dart';
+import 'package:flutter_ecommerce/features/auth/presentations/services/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'signup_form_state.dart';
 import '../../domain/validators/email.dart';
@@ -5,9 +9,19 @@ import '../../domain/validators/password.dart';
 import '../../domain/validators/confirmpassword.dart';
 
 class SignupNotifier extends Notifier<SignupFormState> {
+  late final AuthService _authService;
+
   @override
   SignupFormState build() {
+    _authService = ref.read(authServiceProvider);
     return const SignupFormState();
+  }
+
+  // =========================
+  // FULL NAME
+  // =========================
+  void onFullNameChanged(String value) {
+    state = state.copyWith(fullName: FullnameInput.dirty(value));
   }
 
   // =========================
@@ -48,6 +62,13 @@ class SignupNotifier extends Notifier<SignupFormState> {
   }
 
   // =========================
+  // ROLE
+  // =========================
+  void onRoleChanged(String value) {
+    state = state.copyWith(role: RoleSelector.dirty(value));
+  }
+
+  // =========================
   // TOGGLE VISIBILITY
   // =========================
   void togglePasswordVisibility() {
@@ -72,14 +93,25 @@ class SignupNotifier extends Notifier<SignupFormState> {
     state = state.copyWith(isSubmitting: true);
 
     try {
-      // TODO: call API signup
-      await Future.delayed(const Duration(seconds: 2));
+      final error = await _authService.signup(
+        email: state.email.value,
+        password: state.password.value,
+        fullName: state.fullName.value,
+        role: state.role.value,
+      );
 
-      // TODO: handle success
+      if (error != null) {
+        // 🔥 Firebase error
+        state = state.copyWith(submitError: error);
+        return;
+      }
+
+      // ✅ Success
+      state = state.copyWith(isSubmitting: false, isSuccess: true);
     } catch (e) {
-      // TODO: handle error
+      state = state.copyWith(isSubmitting: false, isSuccess: false);
     } finally {
-      state = state.copyWith(isSubmitting: false);
+      state = state.copyWith(isSubmitting: false, isSuccess: false);
     }
   }
 }

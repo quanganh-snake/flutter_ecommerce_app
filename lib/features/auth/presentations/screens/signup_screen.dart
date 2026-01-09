@@ -3,6 +3,7 @@ import 'package:flutter_ecommerce/features/auth/domain/validators/confirmpasswor
 import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
 import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
 import 'package:flutter_ecommerce/features/auth/presentations/providers/signup_form_provider.dart';
+import 'package:flutter_ecommerce/features/auth/presentations/screens/login_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignupScreen extends ConsumerWidget {
@@ -11,6 +12,31 @@ class SignupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signupForm = ref.watch(signupNotifierProvider);
+    final _isLoading = signupForm.isSubmitting;
+
+    ref.listen(signupNotifierProvider, (previous, next) {
+      if (next.submitError != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.submitError!),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+
+      if (next.isSuccess) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Đăng ký thành công')));
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) {
+              return const LoginScreen();
+            },
+          ),
+        );
+      }
+    });
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -24,6 +50,20 @@ class SignupScreen extends ConsumerWidget {
                 'assets/images/login-concept-illustration.png',
                 height: 220,
                 fit: BoxFit.contain,
+              ),
+              const SizedBox(height: 24),
+
+              TextField(
+                onChanged: (value) => ref
+                    .read(signupNotifierProvider.notifier)
+                    .onFullNameChanged(value),
+                decoration: InputDecoration(
+                  labelText: 'Họ và tên',
+                  errorText: signupForm.fullName.error,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ),
               const SizedBox(height: 24),
               TextField(
@@ -117,8 +157,13 @@ class SignupScreen extends ConsumerWidget {
                   DropdownMenuItem(value: 'user', child: Text('User')),
                   DropdownMenuItem(value: 'admin', child: Text('Admin')),
                 ],
+                initialValue: signupForm.role.value.isNotEmpty
+                    ? signupForm.role.value
+                    : 'user',
                 onChanged: (value) {
-                  // Xử lý khi chọn vai trò
+                  ref
+                      .read(signupNotifierProvider.notifier)
+                      .onRoleChanged(value!);
                 },
                 decoration: InputDecoration(
                   labelText: 'Chọn vai trò',
@@ -131,18 +176,28 @@ class SignupScreen extends ConsumerWidget {
               SizedBox(
                 width: double.infinity,
                 height: 48,
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
                   onPressed: signupForm.isSubmitting
                       ? null
-                      : () {
-                          ref.read(signupNotifierProvider.notifier).submit();
+                      : () async {
+                          await ref
+                              .read(signupNotifierProvider.notifier)
+                              .submit();
                         },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
-                  child: const Text('Sign Up'),
+                  label: const Text(
+                    'Đăng ký',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                  icon: Icon(
+                    _isLoading ? Icons.hourglass_top : Icons.person_add,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -165,7 +220,7 @@ class SignupScreen extends ConsumerWidget {
                       child: const Text(
                         'Đăng nhập ngay',
                         style: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.orange,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),

@@ -6,12 +6,16 @@ class LoginFormState {
   final PasswordInput password;
   final bool isSubmitting;
   final bool isShowPassword;
+  final String? errorMessage;
+  final String? role;
 
   const LoginFormState({
     this.email = const EmailInput.pure(),
     this.password = const PasswordInput.pure(),
     this.isSubmitting = false,
     this.isShowPassword = false,
+    this.errorMessage,
+    this.role,
   });
 
   bool get isValid => email.isValid && password.isValid;
@@ -19,12 +23,18 @@ class LoginFormState {
   LoginFormState copyWith({
     EmailInput? email,
     PasswordInput? password,
+    bool? isShowPassword,
     bool? isSubmitting,
+    String? errorMessage,
+    String? role,
   }) {
     return LoginFormState(
       email: email ?? this.email,
       password: password ?? this.password,
       isSubmitting: isSubmitting ?? this.isSubmitting,
+      isShowPassword: isShowPassword ?? this.isShowPassword,
+      errorMessage: errorMessage ?? this.errorMessage,
+      role: role ?? this.role,
     );
   }
 

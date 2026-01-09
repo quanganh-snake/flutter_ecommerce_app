@@ -1,39 +1,51 @@
 import 'package:flutter_ecommerce/features/auth/domain/validators/confirmpassword.dart';
 import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
+import 'package:flutter_ecommerce/features/auth/domain/validators/fullname.dart';
 import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
+import 'package:flutter_ecommerce/features/auth/domain/validators/role.dart';
 
 class SignupFormState {
+  final FullnameInput fullName;
   final EmailInput email;
   final PasswordInput password;
   final ConfirmpasswordInput confirmPassword;
-  final String role;
+  final RoleSelector role;
   final bool isSubmitting;
   final bool isShowPassword;
   final bool isShowConfirmPassword;
+  final bool isSuccess;
+  final String? submitError;
 
   const SignupFormState({
+    this.fullName = const FullnameInput.pure(),
     this.email = const EmailInput.pure(),
     this.password = const PasswordInput.pure(),
     this.confirmPassword = const ConfirmpasswordInput.pure(),
-    this.role = 'user',
+    this.role = const RoleSelector.pure(),
     this.isSubmitting = false,
     this.isShowPassword = false,
     this.isShowConfirmPassword = false,
+    this.isSuccess = false,
+    this.submitError,
   });
 
   bool get isValid =>
       email.isValid && password.isValid && confirmPassword.isValid;
 
   SignupFormState copyWith({
+    FullnameInput? fullName,
     EmailInput? email,
     PasswordInput? password,
-    String? role,
+    ConfirmpasswordInput? confirmPassword,
+    RoleSelector? role,
     bool? isSubmitting,
     bool? isShowPassword,
     bool? isShowConfirmPassword,
-    ConfirmpasswordInput? confirmPassword,
+    bool? isSuccess,
+    String? submitError,
   }) {
     return SignupFormState(
+      fullName: fullName ?? this.fullName,
       email: email ?? this.email,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
@@ -42,11 +54,14 @@ class SignupFormState {
       isShowPassword: isShowPassword ?? this.isShowPassword,
       isShowConfirmPassword:
           isShowConfirmPassword ?? this.isShowConfirmPassword,
+      isSuccess: isSuccess ?? this.isSuccess,
+      submitError: submitError,
     );
   }
 
   SignupFormState markAllDirty() {
     return copyWith(
+      fullName: FullnameInput.dirty(fullName.value),
       email: EmailInput.dirty(email.value),
       password: PasswordInput.dirty(password.value),
       confirmPassword: ConfirmpasswordInput.dirty(
