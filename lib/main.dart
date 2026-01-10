@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/features/auth/presentations/screens/login_screen.dart';
 import 'package:flutter_ecommerce/features/admin/dashboard/presentations/screens/dashboard_screen.dart';
-import 'package:flutter_ecommerce/features/user/home/presentations/screens/home_screen.dart';
+import 'package:flutter_ecommerce/features/user/home/presentations/screens/app_main_screen.dart';
 import 'package:flutter_ecommerce/firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -58,7 +58,6 @@ class _AuthStatusHandlerState extends State<AuthStatusHandler> {
       });
 
       if (user != null) {
-        // Giả sử có một hàm fetchUserRole để lấy vai trò người dùng từ cơ sở dữ liệu
         final userDoc = await FirebaseFirestore.instance
             .collection('users')
             .doc(user.uid)
@@ -87,6 +86,8 @@ class _AuthStatusHandlerState extends State<AuthStatusHandler> {
     if (_userRole == null) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
-    return _userRole == 'admin' ? const DashboardScreen() : const HomeScreen();
+    return _userRole == 'admin'
+        ? const DashboardScreen()
+        : const AppMainScreen();
   }
 }

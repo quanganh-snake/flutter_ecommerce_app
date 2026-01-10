@@ -53,6 +53,7 @@ class LoginFormNotifier extends Notifier<LoginFormState> {
       state = state.copyWith(isSubmitting: false, role: role);
     } catch (e) {
       state = state.copyWith(
+        role: null,
         isSubmitting: false,
         errorMessage: 'Đã có lỗi xảy ra. Vui lòng thử lại $e',
       );

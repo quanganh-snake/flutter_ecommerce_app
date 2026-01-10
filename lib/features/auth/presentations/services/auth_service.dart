@@ -55,8 +55,15 @@ class AuthService {
           .get();
 
       return userDoc['role'];
-    } catch (e) {
-      return e.toString();
+    } on FirebaseAuthException catch (e) {
+      print('>>>LOGIN<<< FirebaseAuthException: ${e.code}');
+      switch (e.code) {
+        case 'invalid-credential':
+          return 'Thông tin đăng nhập không hợp lệ';
+        case 'internal-error':
+        default:
+          return 'Đã có lỗi xảy ra. Vui lòng thử lại';
+      }
     }
   }
 

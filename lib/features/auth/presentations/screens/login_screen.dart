@@ -5,7 +5,7 @@ import 'package:flutter_ecommerce/features/auth/presentations/providers/login_fo
 import 'package:flutter_ecommerce/features/auth/presentations/providers/login_form_state.dart';
 import 'package:flutter_ecommerce/features/auth/presentations/screens/signup_screen.dart';
 import 'package:flutter_ecommerce/features/admin/dashboard/presentations/screens/dashboard_screen.dart';
-import 'package:flutter_ecommerce/features/user/home/presentations/screens/home_screen.dart';
+import 'package:flutter_ecommerce/features/user/home/presentations/screens/app_main_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -56,11 +56,11 @@ class LoginScreen extends ConsumerWidget {
             );
           } else if (role == 'user') {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) => const AppMainScreen()),
             );
           } else {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
+              MaterialPageRoute(builder: (context) => const AppMainScreen()),
             );
           }
         }
