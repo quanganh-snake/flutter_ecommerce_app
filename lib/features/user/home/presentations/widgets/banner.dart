@@ -19,7 +19,7 @@ class HomeBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "NEW COLLECTIONS",
                   style: TextStyle(
                     fontSize: 20,
@@ -29,7 +29,7 @@ class HomeBanner extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       "20",
@@ -68,7 +68,7 @@ class HomeBanner extends StatelessWidget {
                 MaterialButton(
                   onPressed: () {},
                   color: Colors.black,
-                  child: Text(
+                  child: const Text(
                     'SHOP NOW',
                     style: TextStyle(color: Colors.white, fontSize: 12),
                   ),

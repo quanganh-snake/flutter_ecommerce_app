@@ -39,7 +39,7 @@ class _AppMainScreenState extends ConsumerState<AppMainScreen> {
             _selectedPageIndex = index;
           });
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Iconsax.home), label: 'Trang chủ'),
           BottomNavigationBarItem(
             icon: Icon(Iconsax.search_normal),

@@ -11,6 +11,7 @@ class ProductModel {
   final bool isCheck;
   final CategoryModel category;
   final List<Color> colors;
+  final List<String> sizes = ["S", "M", "L", "XL"];
 
   ProductModel({
     required this.id,

@@ -28,5 +28,10 @@ linter:
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
     curly_braces_in_flow_control_structures: false
+    prefer_const_constructors: true # Gợi ý const Widget()
+    prefer_const_literals_to_create_immutables: true # Gợi ý const [] hoặc {}
+    prefer_const_declarations: true # Gợi ý const biến thay vì final
+    avoid_unnecessary_containers: true # Gợi ý tránh dùng Container không cần thiết
+    use_key_in_widget_constructors: true # Gợi ý thêm Key vào constructor của Widget
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

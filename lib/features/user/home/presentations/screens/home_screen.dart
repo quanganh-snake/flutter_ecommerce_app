@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/core/models/product_model.dart';
 import 'package:flutter_ecommerce/features/user/home/data/models/category_model.dart';
+import 'package:flutter_ecommerce/features/user/home/presentations/screens/category_products_screen.dart';
+import 'package:flutter_ecommerce/features/user/home/presentations/screens/product_detail_screen.dart';
 import 'package:flutter_ecommerce/features/user/home/presentations/widgets/curated_product_item.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_ecommerce/features/user/home/presentations/widgets/banner.dart';
@@ -33,13 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               clipBehavior: Clip.none,
               children: [
-                Icon(Iconsax.shopping_bag, size: 28, color: Colors.black54),
+                const Icon(
+                  Iconsax.shopping_bag,
+                  size: 28,
+                  color: Colors.black54,
+                ),
                 Positioned(
                   right: -2,
                   top: -4,
                   child: Container(
                     padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.red,
                       shape: BoxShape.circle,
                     ),
@@ -64,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               const SizedBox(height: 16),
-              HomeBanner(),
+              const HomeBanner(),
               // BEGIN: Catgories
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -93,17 +99,39 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: List.generate(
                     categories.length,
                     (index) => InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        // Filter products based on the selected category
+                        final filterItems = products
+                            .where(
+                              (item) =>
+                                  item.category.name.toLowerCase() ==
+                                  categories[index].name.toLowerCase(),
+                            )
+                            .toList();
+
+                        // Navigate to the category items screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoryProductsScreen(
+                              categoryName: categories[index].name,
+                              products: filterItems,
+                            ),
+                          ),
+                        );
+                      },
                       child: Column(
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
+                              horizontal: 12.0,
                             ),
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              width: 80,
-                              height: 80,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              width: 60,
+                              height: 60,
                               decoration: BoxDecoration(
                                 color: Colors.grey.shade100,
                                 borderRadius: BorderRadius.circular(99),
@@ -116,10 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             categories[index].name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                               color: Colors.black87,
@@ -134,8 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
               // END: Catgories
 
               // BEGIN: Curated For You
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -165,7 +193,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           ? const EdgeInsets.symmetric(horizontal: 20)
                           : const EdgeInsets.only(right: 20.0),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ProductDetailScreen(
+                                  product: eCommerceItem,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(16),
+                        ),
                         child: CuratedProductItem(
                           product: eCommerceItem,
                           size: size,
