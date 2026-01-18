@@ -1,7 +1,7 @@
-import 'package:flutter_ecommerce/features/auth/domain/validators/fullname.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/role.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/providers/auth_service_provider.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/services/auth_service.dart';
+import '../../domain/validators/fullname.dart';
+import '../../domain/validators/role.dart';
+import 'auth_service_provider.dart';
+import '../services/auth_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'signup_form_state.dart';
 import '../../domain/validators/email.dart';

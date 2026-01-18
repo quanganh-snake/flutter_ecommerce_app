@@ -19,7 +19,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.9.2
+  sdk: ">=3.10.0 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -40,13 +40,14 @@ dependencies:
   firebase_auth: ^6.1.3
   image_picker: ^1.2.1
   firebase_storage: ^13.0.5
-  flutter_riverpod: ^3.1.0
+  flutter_riverpod: ^2.6.1
   dotted_line: ^3.2.3
   cached_network_image: ^3.4.1
   google_fonts: ^6.3.3
   mask_text_input_formatter: ^2.9.0
   formz: ^0.8.0
   uuid: ^4.5.2
+  riverpod_annotation: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  riverpod_generator: ^2.4.0
+  build_runner: ^2.4.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -73,6 +76,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/categories/
+    - assets/images/subcategories/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,5 @@
-import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
+import '../../domain/validators/email.dart';
+import '../../domain/validators/password.dart';
 
 class LoginFormState {
   final EmailInput email;

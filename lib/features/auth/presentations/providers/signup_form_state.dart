@@ -1,8 +1,8 @@
-import 'package:flutter_ecommerce/features/auth/domain/validators/confirmpassword.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/fullname.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/role.dart';
+import '../../domain/validators/confirmpassword.dart';
+import '../../domain/validators/email.dart';
+import '../../domain/validators/fullname.dart';
+import '../../domain/validators/password.dart';
+import '../../domain/validators/role.dart';
 
 class SignupFormState {
   final FullnameInput fullName;

@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/screens/login_screen.dart';
-import 'package:flutter_ecommerce/features/admin/dashboard/presentations/screens/dashboard_screen.dart';
-import 'package:flutter_ecommerce/features/user/home/presentations/screens/app_main_screen.dart';
-import 'package:flutter_ecommerce/firebase_options.dart';
+import 'features/auth/presentations/screens/login_screen.dart';
+import 'features/dashboard/admin/presentation/screens/dashboard_screen.dart';
+import 'features/dashboard/user/presentation/screens/app_main_screen.dart';
+import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 

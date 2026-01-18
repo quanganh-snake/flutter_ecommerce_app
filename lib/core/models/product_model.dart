@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/features/user/home/data/models/category_model.dart';
+import './category_model.dart';
 
 class ProductModel {
   final String id;

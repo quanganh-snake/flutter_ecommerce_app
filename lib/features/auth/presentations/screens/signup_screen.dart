@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/confirmpassword.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/providers/signup_form_provider.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/screens/login_screen.dart';
+import '../../domain/validators/confirmpassword.dart';
+import '../../domain/validators/email.dart';
+import '../../domain/validators/password.dart';
+import '../providers/signup_form_provider.dart';
+import 'login_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignupScreen extends ConsumerWidget {
@@ -12,7 +12,7 @@ class SignupScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signupForm = ref.watch(signupNotifierProvider);
-    final _isLoading = signupForm.isSubmitting;
+    final isLoading = signupForm.isSubmitting;
 
     ref.listen(signupNotifierProvider, (previous, next) {
       if (next.submitError != null) {
@@ -43,7 +43,7 @@ class SignupScreen extends ConsumerWidget {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 16, right: 16),
+          padding: const EdgeInsets.only(left: 16, right: 16),
           child: Column(
             children: [
               Image.asset(
@@ -153,7 +153,7 @@ class SignupScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField(
-                items: [
+                items: const [
                   DropdownMenuItem(value: 'user', child: Text('User')),
                   DropdownMenuItem(value: 'admin', child: Text('Admin')),
                 ],
@@ -195,7 +195,7 @@ class SignupScreen extends ConsumerWidget {
                     style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   icon: Icon(
-                    _isLoading ? Icons.hourglass_top : Icons.person_add,
+                    isLoading ? Icons.hourglass_top : Icons.person_add,
                     color: Colors.white,
                   ),
                 ),
@@ -210,14 +210,14 @@ class SignupScreen extends ConsumerWidget {
                     onTap: () {
                       Navigator.of(context).pop();
                     },
-                    splashColor: Color.fromARGB(102, 182, 234, 240),
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                    splashColor: const Color.fromARGB(102, 182, 234, 240),
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 8.0,
                         vertical: 1,
                       ),
-                      child: const Text(
+                      child: Text(
                         'Đăng nhập ngay',
                         style: TextStyle(
                           color: Colors.orange,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/email.dart';
-import 'package:flutter_ecommerce/features/auth/domain/validators/password.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/providers/login_form_provider.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/providers/login_form_state.dart';
-import 'package:flutter_ecommerce/features/auth/presentations/screens/signup_screen.dart';
-import 'package:flutter_ecommerce/features/admin/dashboard/presentations/screens/dashboard_screen.dart';
-import 'package:flutter_ecommerce/features/user/home/presentations/screens/app_main_screen.dart';
+import '../../domain/validators/email.dart';
+import '../../domain/validators/password.dart';
+import '../providers/login_form_provider.dart';
+import '../providers/login_form_state.dart';
+import 'signup_screen.dart';
+import '../../../dashboard/admin/presentation/screens/dashboard_screen.dart';
+import '../../../dashboard/user/presentation/screens/app_main_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -29,7 +29,7 @@ class LoginScreen extends ConsumerWidget {
         } else {
           if (role == null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: Text(
                   'Tài khoản chưa được kích hoạt! Vui lòng kiểm tra email.',
                 ),
@@ -72,7 +72,7 @@ class LoginScreen extends ConsumerWidget {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 32, right: 32),
+          padding: const EdgeInsets.only(left: 32, right: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +88,7 @@ class LoginScreen extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 'Email',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.start,
@@ -102,9 +102,9 @@ class LoginScreen extends ConsumerWidget {
                       : form.email.error == EmailValidationError.invalid
                       ? 'Email không đúng định dạng!'
                       : null,
-                  errorStyle: TextStyle(color: Colors.redAccent),
+                  errorStyle: const TextStyle(color: Colors.redAccent),
                   errorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.redAccent,
                       width: 2,
                       style: BorderStyle.solid,
@@ -116,7 +116,7 @@ class LoginScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orange,
                       width: 1,
                       style: BorderStyle.solid,
@@ -126,7 +126,7 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   focusColor: Colors.orange,
                   focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.red,
                       width: 1,
                       style: BorderStyle.solid,
@@ -138,7 +138,7 @@ class LoginScreen extends ConsumerWidget {
                 cursorColor: Colors.orange,
               ),
               const SizedBox(height: 16),
-              Text(
+              const Text(
                 'Mật khẩu',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 textAlign: TextAlign.start,
@@ -155,7 +155,7 @@ class LoginScreen extends ConsumerWidget {
                       ? 'Tối thiểu 6 ký tự'
                       : null,
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.grey,
                       width: 2,
                       style: BorderStyle.solid,
@@ -164,7 +164,7 @@ class LoginScreen extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.orange,
                       width: 1,
                       style: BorderStyle.solid,
@@ -174,7 +174,7 @@ class LoginScreen extends ConsumerWidget {
                   ),
                   focusColor: Colors.orange,
                   focusedErrorBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Colors.red,
                       width: 1,
                       style: BorderStyle.solid,
@@ -251,14 +251,14 @@ class LoginScreen extends ConsumerWidget {
                   const SizedBox(width: 8),
                   InkWell(
                     onTap: () {
-                      Navigator.of(
-                        context,
-                      ).push(MaterialPageRoute(builder: (_) => SignupScreen()));
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (_) => const SignupScreen()),
+                      );
                     },
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 1),
-                      child: const Text(
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1),
+                      child: Text(
                         'Đăng ký ngay',
                         style: TextStyle(
                           color: Colors.orange,
