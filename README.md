@@ -10,6 +10,14 @@ flutter pub run build_runner build --delete-conflicting-outputs
 
 ```
 
+- Lệnh watch khi dev để tự động generate provider với riverpod generator
+
+```bash
+
+flutter pub run build_runner watch
+
+```
+
 - `build_runner`:
   - Tác dụng: Khởi chạy công cụ build_runner.
 
@@ -83,6 +91,8 @@ features/
 ```
 
 - Mỗi một module = 1 feature ==> Đối với feature theo ROLE
+
+```
   features/
   ├── auth/
   ├── product/
@@ -93,6 +103,7 @@ features/
   │ │ └── presentation/
   │ └── user/
   │ └── presentation/
+```
 
 ## Clean Architecture bên trong mỗi feature
 

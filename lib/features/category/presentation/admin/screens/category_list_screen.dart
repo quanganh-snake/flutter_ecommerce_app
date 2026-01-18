@@ -15,6 +15,10 @@ class CategoryListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin - Categories'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),

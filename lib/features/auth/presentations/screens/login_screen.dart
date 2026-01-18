@@ -234,7 +234,7 @@ class LoginScreen extends ConsumerWidget {
                           ],
                         )
                       : const Text(
-                          'Login',
+                          'Đăng nhập',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
